@@ -1,5 +1,23 @@
-* Version Control System
-  git
+* Version Control System (Git)
+** Install git
+   Install newest version from [[https://www.kernel.org/pub/software/scm/git/][source]] (recommended)
+   sudo apt-get install git (not good)
+
+** Basic commands
+*** git config
+    git config --global user.name "baoxianzhang"
+    git config --global user.email baoxianzhit@gmail.com
+    git config --global core.editor vim
+    git config --global merge.tool vimdiff
+*** git status
+*** git add .
+*** git commit
+    git commit (recommended)
+    git commit -m "xxx" (not good)
+*** git pull
+    git pull --rebase
+*** git push
+
 ** commit rules
 *** one thing one commit
 *** thoughtbot rule
@@ -17,16 +35,20 @@
     #+END_QUOTE
 
 *** push frequently
-** Example
-   #+BEGIN_QUOTE
-   fix($compile): couple of unit tests for IE9
+*** Example
+    #+BEGIN_QUOTE
+    fix($compile): couple of unit tests for IE9
 
-   Older IEs serialize html uppercased, but IE9 does not...
-   Would be better to expect case insensitive, unfortunately jasmine does
-   not allow to user regexps for throw expectations.
+    Older IEs serialize html uppercased, but IE9 does not...
+    Would be better to expect case insensitive, unfortunately jasmine does
+    not allow to user regexps for throw expectations.
 
-   Closes #392 or links
-   #+END_QUOTE
+    Closes #392 or links
+    #+END_QUOTE
 
 ** Some files should not be added in the VCS
    Try to write the .gitignore file. These files should not be added in the VCS, bin, obj, dll, ~xxx, ...
+
+* Project construction
+** wstool and rosinstall file
+     

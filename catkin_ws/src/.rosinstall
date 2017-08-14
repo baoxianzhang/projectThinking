@@ -1,0 +1,1 @@
+- git: {local-name: pro_demo, uri: http://some/uri, version: 123}
