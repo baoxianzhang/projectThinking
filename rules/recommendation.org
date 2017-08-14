@@ -1,0 +1,32 @@
+* Version Control System
+  git
+** commit rules
+*** one thing one commit
+*** thoughtbot rule
+    [[https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message][5-useful-tips-for-a-better-commit-message]]
+    #+BEGIN_QUOTE
+    50-character subject line
+
+    72-character wrapped longer description. This should answer:
+
+    * Why was this change necessary?
+    * How does it address the problem?
+    * Are there any side effects?
+
+    Include a link to the ticket, if any.
+    #+END_QUOTE
+
+*** push frequently
+** Example
+   #+BEGIN_QUOTE
+   fix($compile): couple of unit tests for IE9
+
+   Older IEs serialize html uppercased, but IE9 does not...
+   Would be better to expect case insensitive, unfortunately jasmine does
+   not allow to user regexps for throw expectations.
+
+   Closes #392 or links
+   #+END_QUOTE
+
+** Some files should not be added in the VCS
+   Try to write the .gitignore file. These files should not be added in the VCS, bin, obj, dll, ~xxx, ...

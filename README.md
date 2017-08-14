@@ -1,18 +1,24 @@
 # Project thinking
-This project is suited for the ubuntu and with ROS, others may also suittable.
+This project is suited for the ubuntu and with ROS, others may be also suitable.
 
-## pro_demo
+## Language: 
+C++
+
+Python
+
+## Structure
+### pro_demo
 The project demo contain basic struct and element files and dirctories.
 
-## rules
+### rules
 Mainly the coding guides and some recommendations.
 
-## skills
+### skills
 Project skills need.
 
-## snippets
+### snippets
 The code snippets.
 
-## thinking
+### thinking
 The project useful thinking.
 
