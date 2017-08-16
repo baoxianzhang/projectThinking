@@ -1,10 +1,10 @@
 * Git
-  Git 是免费的开源的分布式版本控制系统，是目前世界上被最广泛使用的现代软件版本管理系统。  
+  Git 是免费的开源的分布式版本控制系统，是目前世界上被最广泛使用的现代软件版本管理系统。
+  #+BEGIN_EXAMPLE
   https://git-scm.com
-
   https://git-scm.com/docs
-
   https://github.com
+  #+END_EXAMPLE
 ** Git 的由来
    Linus Torvalds->Linux kernal(1991)->BitKeeper(2002)->Git(2005)
 
@@ -70,12 +70,12 @@
 
    一个记录着目录树内容及其中哥哥文件对应 blob 对象索引的 tree 对象
 
-   一个包含指向 tree 对象的索引和其他提交信息元数据的 commit 对象 
+   一个包含指向 tree 对象的索引和其他提交信息元数据的 commit 对象
 
    [[file:img/gitcommittreeblob.png]]
 
    做些修改后再次提交，那么这次的提交对象包含上次提交对象的指针。两次提交后，仓库历史会变成如
- 
+
    [[file:img/gitcommittreeblob1.png]]
 
    Git 对象
@@ -167,13 +167,13 @@
     1. thoughtbot 规范
     #+BEGIN_QUOTE
     50-character subject line
-    
+
     72-character wrapped longer description. This should answer:
-    
+
     * Why was this change necessary?
     * How does it address the problem?
     * Are there any side effects?
-    
+
     Include a link to the ticket, if any.
     #+END_QUOTE
 

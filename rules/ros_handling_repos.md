@@ -39,7 +39,7 @@ In a "normal" git-based project, entering `git status` would give you an immedia
 First, remember that we only have a one-layer deep level of repositories, i.e. the folder structure we use is
 
 ```
-  -- project repository (i.e. RS_Localization; main git repo)
+  -- project repository 
       -- src
           -- .rosinstall
           -- folder1 (1st package repository)
