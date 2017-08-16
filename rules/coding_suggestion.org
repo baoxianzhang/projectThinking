@@ -1,0 +1,30 @@
+* Coding suggestion
+** Be concise
+   Remove useless brank spaces, lines, comments, header files.
+   Try to reconstruct the code to be more efficient, fast and easy-understanding.
+   Put the common and the unchange part outside.
+   Use the suitable space to make the code more readable.
+   Try to align the "=" when several assignments.
+
+** Pi
+   Used M_PI.
+   Don't using "#define" to define the conversion between rad and degree.
+   In pcl, there is DEG2RAD and RAD2DEG
+** Headers include
+   Be structure, from system, publish libraries to self-defined header files.
+   Seperate with blank line.
+   Remove useless header files.
+** namespace
+   Group the code using namespace.
+** Brackets
+   Use the style in the funtion definitions.
+   #+BEGIN_QUOTE
+   void someFunction(void)
+   {
+   }
+   #+END_QUOTE
+
+** #define
+Avoid to use macro, try to use the const.
+** Use TODO FIXME NOTE to remind you the code statue
+** 

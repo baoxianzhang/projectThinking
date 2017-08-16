@@ -51,4 +51,17 @@
 
 * Project construction
 ** wstool and rosinstall file
-     
+*** Pro
+    multi-repository enable
+    separate the repository to separate the commit msg
+
+** Project structure
+   #+BEGIN_QUOTE
+   -- project repository
+      -- src
+      -- .rosinstall
+      -- folder1 (1st package repository)
+      -- folder2 (2nd package repository)
+      -- ..
+      -- folderN (n-th package repository)
+   #+END_QUOTE
