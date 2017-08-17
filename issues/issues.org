@@ -1,0 +1,9 @@
+* message headers won't build first
+http://answers.ros.org/question/188982/message-headers-wont-build-first/
+
+CMakeLists.txt 中 lib 和 exe 后面加上
+add_dependencies(lib_or_exe ${catkin_EXPORTED_TARGETS})
+
+package.xml 中加入
+  <run_depend>xxxxxx</run_depend>
+  <build_depend>xxxxxx</build_depend>

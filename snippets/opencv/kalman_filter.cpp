@@ -20,6 +20,12 @@ cv::Mat control_vector = cv::Mat::zeros(cv::Size(1, 3), CV_32F);
 cv::Mat measure_vector = cv::Mat::zeros(cv::Size(1, 3), CV_32F);
 kalman_filter.statePost = cv::Mat::zeros(cv::Size(1, 3), CV_32F);
 
+// predict
+kalman_filter.predict(control_vector);
+// correct
+kalman_filter.correct(measure_vector);
+
+
 // TODO use the cv::Mat_
 
 

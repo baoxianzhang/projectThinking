@@ -5,7 +5,17 @@
    Put the common and the unchange part outside.
    Use the suitable space to make the code more readable.
    Try to align the "=" when several assignments.
+   #+BEGIN_SRC C++
+     // Good
+     for(int i = 0; i < 10; ++i)
+     {
+     }
 
+     // Bad
+     for(int i=0;i<10;i++)
+     {
+     }
+   #+END_SRC
 ** Pi
    Used M_PI.
    Don't using "#define" to define the conversion between rad and degree.
@@ -153,9 +163,9 @@
   void funtion(int variable1 ,int variable2,int variable3);
 
   // Good
-  int a   = 10;
-  int bc  = 11;
-  int cde = 21;
+  int   a   = 10;
+  int   bc  = 11;
+  float cde = 21;
   std::cout << a << bc << cde <<std::endl;
   void funtion(int variable1,int variable2, int variable3);
    #+END_SRC
@@ -171,28 +181,28 @@
 
 ** Nameing
    Take time to a good name for a variable and function, be self-description.
-
-   Prefer:
    #+BEGIN_SRC C++
-  velocity_mean
-   #+END_SRC
+     // Good
+     // float vel_mean;
+     // Bad
+     // float mean_vel;
 
-   to:
-   #+BEGIN_SRC C++
-  mean_velocity
+     // Good
+     // std::string mappath_save;
+     // Bad
+     // std::string save_mapping_path;
+
    #+END_SRC
 
 ** Exception handling
    Try to consider some situations when the code fails to run.
    Try to output some useful message to remind the code status, don't message the core methods.
 ** Launch file
-   Define custom variables in the launch files. Don't use the absolute path in the launch and the code.
+   Define custom variables in the launch files. Don't use the *absolute path* in the launch and the code.
 ** Rviz file
    Define a default rviz, don't let your parter to set the parameters again and again.
-
 ** Code parameter
    When the parameter number is large to be tune, use the yaml to set the parameters.
-
 ** Clean
    To be clean, remove the useless or error comment, code, in .h, .cpp, CMakeLists.txt, package.xml and so on.
 ** C++ or C
@@ -230,3 +240,71 @@
    vector<type>().swap(v); does the same in a more obfuscated way: swap the buffers of the temporary vector and the old vector (constant time), destruct the temporary vector (linear time)
    Using swap may add some minor overhead caused by the construction and destruction of the temporary vector.
 **
+** Use the SPACE not TAB
+** Don't assignment in the class declartion
+Only in the situation of the static memebers.
+
+
+** Coding for lib
+When coding for lib in the company, all the implimentation should be encapsulated.
+#+BEGIN_SRC C++
+  // demo_impl.h
+  class DemoImpl
+  {
+  public:
+    DemoImpl();
+    ~DemoImpl();
+    void doSomething(void);
+  private:
+  };
+
+  // demo_impl.cpp
+  DemoImpl::DemoImpl()
+  {
+  }
+
+  DemoImpl::doSomething()
+  {
+    std::cout << "doSomething!" << std::endl;
+  }
+
+  DemoImpl::~DemoImpl()
+  {
+  }
+
+
+  // demo.h
+  class DemoImpl;
+  class Demo
+  {
+  Public:
+    Demo();
+    ~Demo();
+    void doSomething(void);
+  Private:
+    DemoImpl* demo_impl_;
+  };
+
+  // demo.cpp
+  #include "demo.h"
+  #include "demo_impl.h"
+  Demo::Demo()
+  {
+    demo_impl_ = new DemoImpl;
+  }
+
+  Demo::doSomething(void)
+  {
+    demo_impl_->doSomething();
+  }
+
+  Demo::~Demo()
+  {
+    if(demo_impl_)
+    {
+      delete demo_impl_;
+    }
+  }
+
+#+END_SRC
+

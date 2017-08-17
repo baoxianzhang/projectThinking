@@ -1,3 +1,61 @@
+* Project construction
+** wstool and rosinstall file
+*** Pro
+    multi-repository enable
+    separate the repository to separate the commit msg
+
+** Project structure
+   #+BEGIN_QUOTE
+   -- project repository
+   -- src
+   -- .rosinstall
+   -- folder1 (1st package repository)
+   -- folder2 (2nd package repository)
+   -- ..
+   -- folderN (n-th package repository)
+   #+END_QUOTE
+* Build tool
+  Use [[http://catkin-tools.readthedocs.io/en/latest/][*catkin build*]], not use catkin_make.
+
+  The current release of catkin_tools supports building two types of packages:
+  - Catkin – CMake packages that use the Catkin CMake macros
+  - CMake – “Plain” CMake packages
+
+** Installing catkin_tools
+*** Installing on Ubuntu with apt-get
+    First you must have the ROS repositories which contain the .deb for catkin_tools:
+    #+BEGIN_SRC sh
+      sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros-latest.list'
+      wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
+      sudo apt-get update
+      sudo apt-get install python-catkin-tools
+    #+END_SRC
+*** Installing on other platforms with pip
+    #+BEGIN_SRC sh
+      sudo pip install -U catkin_tools
+    #+END_SRC
+*** Installing from source
+    #+BEGIN_SRC sh
+      git clone https://github.com/catkin/catkin_tools.git
+      cd catkin_tools
+      pip install -r requirements.txt --upgrade
+      python setup.py install --record install_manifest.txt
+    #+END_SRC
+
+** Usage
+   #+BEGIN_SRC sh
+   catkin -h
+   catkin build -h
+   catkin clean -h
+
+   catkin config
+   catkin create
+   catkin env
+   catkin init
+   catkin list
+   catkin locate
+   catkin profile
+   #+END_SRC
 * Version Control System (Git)
 ** Install git
    Install newest version from [[https://www.kernel.org/pub/software/scm/git/][source]] (recommended)
@@ -48,20 +106,4 @@
 
 ** Some files should not be added in the VCS
    Try to write the .gitignore file. These files should not be added in the VCS, bin, obj, dll, ~xxx, ...
-
-* Project construction
-** wstool and rosinstall file
-*** Pro
-    multi-repository enable
-    separate the repository to separate the commit msg
-
-** Project structure
-   #+BEGIN_QUOTE
-   -- project repository
-      -- src
-      -- .rosinstall
-      -- folder1 (1st package repository)
-      -- folder2 (2nd package repository)
-      -- ..
-      -- folderN (n-th package repository)
-   #+END_QUOTE
+* 
