@@ -35,12 +35,12 @@
     5. 将本地版本库推到服务器
 
     https://git.wiki.kernel.org/index.php/GitSvnComparsion
-    1. git  faster
-    2. svn is sub, git is all
-    3. git smaller, for mozilla project 30x
+    - git  faster
+    - svn is sub, git is all
+    - git smaller, for mozilla project 30x
     SVN contains two copies: one for actually work, another hidden in .svn/ to aid operation such as status, diff.
     Git working directory requires only one small index file.
-    4. git branch is simpler.
+    - git branch is simpler.
 
 ** Git 的机理
    不同于某些版本管理软件，Git 在决定代码修改历史以及保存形式的时候不会被文件名的变化所愚弄，Git 关注的是文件的内容本身。在实际操作中，代码文件经历频繁的再命名，分解和合并。
@@ -711,6 +711,6 @@
 **** [[blog.jobbole.com/109466][Git 最佳实践:分支管理]]
 **** [[blog.jobbole.com/108834][SVN、GIT 日常看我就够了]]
 **** [[blog.jobbole.com/108828][Git 王者超神之路]]
-*** 《Git 权威指南》
 *** [[https://github.com/nvie/gitflow][gitflow in github]]
 *** [[http://www.jianshu.com/p/e196b90b5b15][Git: Reset, Checkout 和 Revert]]
+*** 《Git 权威指南》
