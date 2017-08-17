@@ -20,8 +20,22 @@
    - Message encrption
 
    Every header file should use the #ifndef to guide.
-** namespace
+
+   Use the company header, not your self header.
+   Don't:
+   #+BEGIN_SRC C++
+     // Created by xxx, 2017.01.01
+   #+END_SRC
+
+** Namespace
    Group the code using namespace.
+   #+BEGIN_SRC C++
+     namespace my_namespace
+     {
+
+     }
+   #+END_SRC
+
 ** Brackets
    Use the style in the funtion definitions.
    #+BEGIN_QUOTE
@@ -82,7 +96,7 @@
    #+END_SRC
 
 ** Comment
-   Use doxygen style to comment your code in English.
+   Use doxygen style to comment your code in *English*.
 
    #+BEGIN_SRC C++
      /** @brief Fibonacci calculation
@@ -105,4 +119,114 @@
        unsigned int calculateFibonacci(unsigned int n);
      };
    #+END_SRC
-** 
+** Coding
+   All team memebers use the same version of gcc and g++, not to bore by the compiler.
+
+   #+BEGIN_SRC C++
+  // Bad
+  using namespace std;
+  using namespace cv;
+  using namespace pcl;
+
+  // Good
+  std::cout
+  std::endl
+  std::string
+  std::size_t
+  std::vector
+  std::map
+  std::pair
+  std::list
+
+  cv::Point2f
+
+   #+END_SRC
+
+   #+BEGIN_SRC C++
+  // Bad
+  int a = 10  ;
+  int bc= 11;
+
+
+  int cde =21;
+  std::cout<<a<<bc<<cde<<std::endl ;
+  void funtion(int variable1 ,int variable2,int variable3);
+
+  // Good
+  int a   = 10;
+  int bc  = 11;
+  int cde = 21;
+  std::cout << a << bc << cde <<std::endl;
+  void funtion(int variable1,int variable2, int variable3);
+   #+END_SRC
+
+** Typedef
+   Use typedef to short your type and when define your struct.
+   #+BEGIN_SRC C++
+  typedef struct abc
+  {
+
+  }abc;
+   #+END_SRC
+
+** Nameing
+   Take time to a good name for a variable and function, be self-description.
+
+   Prefer:
+   #+BEGIN_SRC C++
+  velocity_mean
+   #+END_SRC
+
+   to:
+   #+BEGIN_SRC C++
+  mean_velocity
+   #+END_SRC
+
+** Exception handling
+   Try to consider some situations when the code fails to run.
+   Try to output some useful message to remind the code status, don't message the core methods.
+** Launch file
+   Define custom variables in the launch files. Don't use the absolute path in the launch and the code.
+** Rviz file
+   Define a default rviz, don't let your parter to set the parameters again and again.
+
+** Code parameter
+   When the parameter number is large to be tune, use the yaml to set the parameters.
+
+** Clean
+   To be clean, remove the useless or error comment, code, in .h, .cpp, CMakeLists.txt, package.xml and so on.
+** C++ or C
+   When you code using C++, try to find the C++ interfaces, like opencv KalmanFilter.
+** Sequence
+   Function called shoud be left to the after.
+** Small code
+   Don't write the big code, write the small code.
+** Class special member function
+   - copy constructor
+   - "=" assignment function
+   - deconstructor
+   You must write the copy constructor and "=" assignment function and deconstructor.
+   When you use like push_back function, it will implicitly be called, it will be dangerous.
+   When you have some pointers, *new* called, your should release the resource in the deconstructor.
+** Unit
+   Use SI units and follow ROS REP-103, e.g. use radian instead of degree, m/s instead of km/h, m instead of miles.
+   And use the square brackets.
+   #+BEGIN_SRC C++
+  int velocity; // the velocity of car [m/s]
+   #+END_SRC
+
+** std::vector clear and swap
+   Use the following code to shrink your memory usage. Please refer to the [[http://blog.jobbole.com/37700/][page]].
+   #+BEGIN_SRC C++
+     std::vector<type> v;
+     std::vector<type>().swap(v);
+
+     // for string
+     std::string(s).swap(s);
+     // may add the juagement
+     // if(!v.empty())
+   #+END_SRC
+   v.clear() would simply to do what is says: destroy all the element of v (in linear time), but the capacity remains the same.
+   vector<type>().swap(v); does the same in a more obfuscated way: swap the buffers of the temporary vector and the old vector (constant time), destruct the temporary vector (linear time)
+   Using swap may add some minor overhead caused by the construction and destruction of the temporary vector.
+**
