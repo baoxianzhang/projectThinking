@@ -1,0 +1,83 @@
+* Doxygen
+** Generate documentation from source code
+Doxygen is the de facto standard tool for generating documentation from annotated C++ sources, but it also supports other popular programming languages such as C, Objective-C, C#, PHP, Java, Python, IDL (Corba, Microsoft, and UNO/OpenOffice flavors), Fortran, VHDL, Tcl, and to some extent D.
+
+Doxygen can help you in three ways:
+
+- It can generate an on-line documentation browser (in HTML) and/or an off-line reference manual (in $\mbox{\LaTeX}$) from a set of documented source files. There is also support for generating output in RTF (MS-Word), PostScript, hyperlinked PDF, compressed HTML, and Unix man pages. The documentation is extracted directly from the sources, which makes it much easier to keep the documentation consistent with the source code.
+- You can configure doxygen to extract the code structure from undocumented source files. This is very useful to quickly find your way in large source distributions. Doxygen can also visualize the relations between the various elements by means of include dependency graphs, inheritance diagrams, and collaboration diagrams, which are all generated automatically.
+- You can also use doxygen for creating normal documentation (as I did for the doxygen user manual and web-site).
+ 
+Doxygen is developed under Mac OS X and Linux, but is set-up to be highly portable. As a result, it runs on most other Unix flavors as well. Furthermore, executables for Windows are available.
+** [[http://www.stack.nl/~dimitri/doxygen/manual/install.html][Downloads and Installation]]
+*** Shell
+    #+BEGIN_SRC sh
+      sudo apt-get install doxygen
+      sudo apt-get install doxygen-gui
+    #+END_SRC
+
+*** [[http://www.stack.nl/~dimitri/doxygen/download.html][GIT repository]]
+    #+BEGIN_SRC sh
+      sudo apt-get install flex bison
+      sudo apt-get install graphiviz
+      git clone https://github.com/doxygen/doxygen.git
+      cd doxygen
+      mkdir build
+      cd build
+      cmake -G "Unix Makefiles" ..
+      make
+      sudo make install
+    #+END_SRC
+*** Source and Binaries
+*** Manual
+Download [[http://ftp.stack.nl/pub/users/dimitri/doxygen_manual-1.8.13.pdf.zip][manual pdf]]
+** Documenting the code
+If you want to document the members of a file, struct, union, class, or enum, it is sometimes desired to place the documentation block after the member instead of before. For this purpose you have to put an additional < marker in the comment block. Note that this also works for the parameters of a function.
+   #+BEGIN_SRC C++
+     /** @brief Fibonacci calculation
+
+         Here is the longer description.
+         @code
+         Fibonacci fib;
+         unsigned int fib_value = fib.calulateFibonacci(100);
+         ...
+         @endcode
+      ,*/
+     Class Fibonacci
+     {
+     public:
+       //! the default constructor
+       Fibonacci();
+       /** @brief Caculate the fibonacci value
+           @param[in] n the nth elemnt
+           @return the fibonacci of n
+       ,*/
+       unsigned int calculateFibonacci(unsigned int n);
+       private:
+         int var; //!< Brief description after the member
+     };
+   #+END_SRC
+
+** [[http://www.stack.nl/~dimitri/doxygen/manual/doxygen_usage.html][Doxygen usage]]
+- You document your source code with special documentation blocks (see section Special comment blocks).
+- You generate a configuration file (see section Configuration) by calling doxygen with the -g option:
+  #+BEGIN_SRC sh
+    doxygen -g <config_file>
+  #+END_SRC
+- You edit the configuration file so it matches your project. In the configuration file you can specify the input files and a lot of optional information.
+- You let doxygen generate the documentation, based on the settings in the configuration file:
+  #+BEGIN_SRC sh
+    doxygen <config_file>
+  #+END_SRC
+
+** [[http://www.stack.nl/~dimitri/doxygen/manual/doxywizard_usage.html][Doxywizard usage]]
+Doxywizard is a GUI front-end for configuring and running doxygen.
+
+Note it is possible to start the doxywizard with as argument the configuration file to be used.
+
+When you start doxywizard it will display the main window (the actual look depends on the OS used).
+
+#+BEGIN_SRC sh
+  doxywizard
+#+END_SRC
+

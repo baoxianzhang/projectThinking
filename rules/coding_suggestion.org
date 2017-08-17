@@ -10,10 +10,16 @@
    Used M_PI.
    Don't using "#define" to define the conversion between rad and degree.
    In pcl, there is DEG2RAD and RAD2DEG
-** Headers include
+** Headers
    Be structure, from system, publish libraries to self-defined header files.
    Seperate with blank line.
    Remove useless header files.
+
+   Every header(source) files should include the minimun header files. For the following reasons:
+   - Compile faster
+   - Message encrption
+
+   Every header file should use the #ifndef to guide.
 ** namespace
    Group the code using namespace.
 ** Brackets
@@ -25,6 +31,78 @@
    #+END_QUOTE
 
 ** #define
-Avoid to use macro, try to use the const.
-** Use TODO FIXME NOTE to remind you the code statue
+   Avoid to use macro, try to use the const.
+** Use TODO FIXME NOTE to remind you the code status
+   #+BEGIN_SRC C++
+     // TODO Consider different yaw
+     // FIXME To consider the singular problem
+     // NOTE Don't set the flag out side the function, all done here.
+   #+END_SRC
+
+** Every header and source file should contain the following license declartion
+   #+BEGIN_SRC C++
+/*
+ * Software License Agreement (BSD License)
+ *
+ *  Point Cloud Library (PCL) - www.pointclouds.org
+ *  Copyright (c) 2010-2011, Willow Garage, Inc.
+ *
+ *  All rights reserved.
+ *
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions
+ *  are met:
+ *
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *   * Redistributions in binary form must reproduce the above
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
+ *     with the distribution.
+ *   * Neither the name of the copyright holder(s) nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ *  FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ *  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ *  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ *  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ *  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ *  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ *  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ *  POSSIBILITY OF SUCH DAMAGE.
+ *
+ * $Id$
+ *
+ */
+   #+END_SRC
+
+** Comment
+   Use doxygen style to comment your code in English.
+
+   #+BEGIN_SRC C++
+     /** @brief Fibonacci calculation
+
+         Here is the longer description.
+         @code
+         Fibonacci fib;
+         unsigned int fib_value = fib.calulateFibonacci(100);
+         ...
+         @endcode
+      ,*/
+     Class Fibonacci
+     {
+       //! the default constructor
+       Fibonacci();
+       /** @brief Caculate the fibonacci value
+           @param[in] n the nth elemnt
+           @return the fibonacci of n
+       ,*/
+       unsigned int calculateFibonacci(unsigned int n);
+     };
+   #+END_SRC
 ** 
