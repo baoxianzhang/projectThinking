@@ -1,0 +1,9 @@
+<launch>
+  <node pkg="demo" type="demo_node" name="demo_node" output="screen">
+    <param name="x_value" value="0" />
+    <param name="y_value" value="1" />
+  </node>
+
+  <!-- <node pkg="rviz" name="rviz" type="rviz"  args="-d $(find demo)/rviz/demo.rviz"> -->
+  <!-- </node> -->
+</launch>

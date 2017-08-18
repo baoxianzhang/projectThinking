@@ -20,6 +20,7 @@ generate_messages(
 )
 
 catkin_package()
+
 set(CMAKE_BUILD_TYPE RelWithDebInfo)
 
 # PCL
@@ -31,13 +32,17 @@ add_definitions(${PCL_DEFINITIONS})
 # OpenCV
 find_package(OpenCV REQUIRED)
 
+# GTest
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIR})
+
 include_directories(include
   ${catkin_INCLUDE_DIRS})
 # Head files
 set(HEAD_FILES
   include/demo/demo.h
   src/demo_impl.h
-  )
+ )
 
 set(SOURCE_FILES
   src/demo.cpp
@@ -49,4 +54,8 @@ target_link_libraries(demo ${PCL_LIBRARIES} ${OpenCV_LIBRARIES} ${catkin_LIBRARI
 
 # Executable
 add_executable(demo_node src/main.cpp)
-target_link_libraries(demo_node demo ${PCL_LIBRARIES} ${OpenCV_LIBRARIES} ${catkin_LIBRARIES})
+target_link_libraries(demo_node demo)
+
+# Test
+add_executable(demo_test utest/demo_test.cpp)
+target_link_libraries(demo_test demo ${GTEST_LIBRARIES})

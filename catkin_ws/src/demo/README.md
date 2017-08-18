@@ -10,7 +10,6 @@ Project is organized in several folders, each for different usages.
 
 <blockquote>
 demo
-├── action
 ├── cfg
 │   └── cfg.yaml
 ├── CMakeLists.txt
@@ -25,7 +24,7 @@ demo
 ├── model
 ├── msg
 │   └── DemoMsg.msg
-├── pakage.xml
+├── package.xml
 ├── README.md
 ├── rviz
 │   └── demo.rviz
@@ -38,7 +37,7 @@ demo
 │   └── main.cpp
 ├── srv
 │   └── DemoSrv.srv
-└── test
+└── utest
 └── demo_test.cpp
 </blockquote>
 
@@ -49,7 +48,7 @@ demo
 + Consider the include and src folders, there is a folder with the same name with the project in the include folder for further lib package. And src folder should contain the interface .cpp file and the implemention _impl.h and impl.cpp files. And the main.cpp should be just a example showcase.
 + Put all the launch file to the launch folder, which if defined rviz, the rviz configuration file should be put into the rviz folder.
 + Put python scripts and the 3party depends installation shell scripts in the script folder.
-+ Test the code in the test folder, and use the google unit test.
++ Test the code in the utest folder, and use the google unit test.
 + Put message and service type which the first letter should be capital into msg and srv folder separatly. When model exist, put the files in the model folder.
 
 ## Documentation

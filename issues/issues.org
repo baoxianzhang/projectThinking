@@ -1,4 +1,5 @@
-* message headers won't build first
+* Issuess
+** message headers won't build first
 http://answers.ros.org/question/188982/message-headers-wont-build-first/
 
 CMakeLists.txt 中 lib 和 exe 后面加上
@@ -7,3 +8,21 @@ add_dependencies(lib_or_exe ${catkin_EXPORTED_TARGETS})
 package.xml 中加入
   <run_depend>xxxxxx</run_depend>
   <build_depend>xxxxxx</build_depend>
+** when use shared_ptr, compile error "tr1 is not a member of std"
+
+   #+BEGIN_SRC C++
+     // include the header file
+     #include <tr1/memory>
+   #+END_SRC
+   And shared_ptr not support the direct use of *new*.
+
+   #+BEGIN_SRC C++
+     // Error
+     std::tr1::shared_ptr<int> p_int = new int;
+
+     // Right
+     std::tr1::shared_ptr<int> p_int(new int);
+   #+END_SRC
+
+
+
