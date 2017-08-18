@@ -239,13 +239,13 @@
    v.clear() would simply to do what is says: destroy all the element of v (in linear time), but the capacity remains the same.
    vector<type>().swap(v); does the same in a more obfuscated way: swap the buffers of the temporary vector and the old vector (constant time), destruct the temporary vector (linear time)
    Using swap may add some minor overhead caused by the construction and destruction of the temporary vector.
-**
+
 ** Use the SPACE not TAB
 ** Don't assignment in the class declartion
 Only in the situation of the static memebers.
 
 
-** Coding for lib
+** Encapsulation for lib
 When coding for lib in the company, all the implimentation should be encapsulated.
 #+BEGIN_SRC C++
   // demo_impl.h
@@ -307,4 +307,26 @@ When coding for lib in the company, all the implimentation should be encapsulate
   }
 
 #+END_SRC
+
+** Portability of code
+When use the global definitions, try to use the pointers.
+Because, in windows,  if not used the pointer, it will not be initialization.
+
+#+BEGIN_SRC C++
+  #include <demo/demo.h>
+
+  demo_namespace::Demo *g_demo_obj; // for portability in windows, define the pointer
+
+  int main (int argc, char** argv)
+  {
+    g_demo_obj = new demo_namespace::Demo;
+    for (std::size_t i = 0; i < 20; ++i)
+    {
+      g_demo_obj->doSomething();
+    }
+    return 0;
+  }
+
+#+END_SRC
+
 
