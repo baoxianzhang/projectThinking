@@ -1,0 +1,59 @@
+* Google test
+** Download and installation
+   #+BEGIN_SRC sh
+     git clone https://github.com/google/googletest.git
+     cd googletest
+     mkdir build
+     cd build
+     cmake ..
+     make
+     suod make install
+   #+END_SRC
+
+   #+BEGIN_SRC sh
+     # or use apt-get
+     sudo apt-get install libgtest-dev
+   #+END_SRC
+
+
+** Basic usage
+   #+BEGIN_SRC sh
+     # in CMakeLists.txt
+     # GTest
+     find_package(GTest REQUIRED)
+     include_directories(${GTEST_INCLUDE_DIR})
+
+     # Test
+     add_executable(demo_test utest/demo_test.cpp)
+     target_link_libraries(demo_test demo ${GTEST_LIBRARIES})
+   #+END_SRC
+
+
+   #+BEGIN_SRC C++
+     #include "gtest/gtest.h"
+
+     double square-root (const double);
+
+     TEST(SquareRootTest, PositiveNos)
+     {
+       EXPECT_EQ(18.0, square-root (324.0));
+       EXPECT_EQ(25.4, square-root (645.16));
+       EXPECT_EQ(50.3321, square-root (2533.310224));
+     }
+
+     TEST (SquareRootTest, ZeroAndNegativeNos)
+     {
+       ASSERT_EQ(0.0, square-root (0.0));
+       ASSERT_EQ(-1, square-root (-22.0));
+     }
+
+     int main(int argc, char **argv)
+     {
+       ::testing::InitGoogleTest(&argc, argv);
+       return RUN_ALL_TESTS();
+     }
+   #+END_SRC
+
+
+
+** A quick introduction to the Google C++ Testing Framework
