@@ -1,5 +1,9 @@
 * Git
   Git 是免费的开源的分布式版本控制系统，是目前世界上被最广泛使用的现代软件版本管理系统。
+  对 Git 的误解:
+  - 把它当做代码或者其他东西的存储的地方
+　- 会把以前的东西丢掉
+  - 
   #+BEGIN_EXAMPLE
   https://git-scm.com
   https://git-scm.com/docs

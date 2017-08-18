@@ -93,6 +93,7 @@
     #+END_QUOTE
 
 *** push frequently
+*** Fixed(Bug), should be detail
 *** Example
     #+BEGIN_QUOTE
     fix($compile): couple of unit tests for IE9

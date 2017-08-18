@@ -50,6 +50,7 @@ set(SOURCE_FILES
   )
 
 add_library(demo ${SOURCE_FILES} ${HEAD_FILES})
+# add_library(demo STATIC ${SOURCE_FILES} ${HEAD_FILES})
 target_link_libraries(demo ${PCL_LIBRARIES} ${OpenCV_LIBRARIES} ${catkin_LIBRARIES})
 
 # Executable

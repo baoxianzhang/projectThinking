@@ -169,6 +169,23 @@
   std::cout << a << bc << cde <<std::endl;
   void funtion(int variable1,int variable2, int variable3);
    #+END_SRC
+   
+
+   #+BEGIN_SRC C++
+     // Bad
+     x = 0; y = 0; z = 0;
+     roll = 0; pitch = 0; yall = 0;
+
+     // Good
+     x = 0;
+     y = 0;
+     z = 0;
+
+     roll = 0;
+     pitch = 0;
+     yall = 0;
+   #+END_SRC
+
 
 ** Typedef
    Use typedef to short your type and when define your struct.
@@ -330,3 +347,14 @@ Because, in windows,  if not used the pointer, it will not be initialization.
 #+END_SRC
 
 
+** Static or dynamic library
+When output lib, prefer to a static library to encapsulate the core information.
+
+When dynamic libraries, please add a version number using CMake rules.
+** ROS msg and srv
+The first letter of msg and srv file name should be capitial.
+The variables of the types should be *under_scored.*
+
+** Small functions
+Code small functions. To be more flexible, more easy understanding.
+Statements in the function should be almost the same level.

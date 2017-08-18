@@ -7,8 +7,11 @@ C++
 Python
 
 ## Structure
-### pro_demo
+### catkin_ws
 The project demo contain basic struct and element files and dirctories.
+
+### issues
+Contain some problems and solutions ever met.
 
 ### rules
 Mainly the coding guides and some recommendations.
