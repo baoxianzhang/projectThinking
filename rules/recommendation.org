@@ -107,4 +107,4 @@
 
 ** Some files should not be added in the VCS
    Try to write the .gitignore file. These files should not be added in the VCS, bin, obj, dll, ~xxx, ...
-* 
+** 

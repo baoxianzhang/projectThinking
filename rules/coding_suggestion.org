@@ -169,7 +169,7 @@
   std::cout << a << bc << cde <<std::endl;
   void funtion(int variable1,int variable2, int variable3);
    #+END_SRC
-   
+
 
    #+BEGIN_SRC C++
      // Bad
@@ -259,12 +259,12 @@
 
 ** Use the SPACE not TAB
 ** Don't assignment in the class declartion
-Only in the situation of the static memebers.
+   Only in the situation of the static memebers.
 
 
 ** Encapsulation for lib
-When coding for lib in the company, all the implimentation should be encapsulated.
-#+BEGIN_SRC C++
+   When coding for lib in the company, all the implimentation should be encapsulated.
+   #+BEGIN_SRC C++
   // demo_impl.h
   class DemoImpl
   {
@@ -323,13 +323,15 @@ When coding for lib in the company, all the implimentation should be encapsulate
     }
   }
 
-#+END_SRC
+   #+END_SRC
+   Don't use the only class constructor function systle
+   The name of topics and parameters is fixed, it is not flexible.
 
 ** Portability of code
-When use the global definitions, try to use the pointers.
-Because, in windows,  if not used the pointer, it will not be initialization.
+   When use the global definitions, try to use the pointers.
+   Because, in windows,  if not used the pointer, it will not be initialization.
 
-#+BEGIN_SRC C++
+   #+BEGIN_SRC C++
   #include <demo/demo.h>
 
   demo_namespace::Demo *g_demo_obj; // for portability in windows, define the pointer
@@ -344,17 +346,35 @@ Because, in windows,  if not used the pointer, it will not be initialization.
     return 0;
   }
 
-#+END_SRC
+   #+END_SRC
 
 
 ** Static or dynamic library
-When output lib, prefer to a static library to encapsulate the core information.
+   When output lib, prefer to a static library to encapsulate the core information.
 
-When dynamic libraries, please add a version number using CMake rules.
+   When dynamic libraries, please add a version number using CMake rules.
 ** ROS msg and srv
-The first letter of msg and srv file name should be capitial.
-The variables of the types should be *under_scored.*
+   The first letter of msg and srv file name should be capitial.
+   The variables of the types should be *under_scored.*
 
 ** Small functions
-Code small functions. To be more flexible, more easy understanding.
-Statements in the function should be almost the same level.
+   Code small functions. To be more flexible, more easy understanding.
+   Statements in the function should be almost the same level.
+** Public or private
+   Please take time to think about the authorith of class functions and variables
+** Sperate packages, node and lib
+   Every package should contain only a target. Seperate node(excutable) and lib.
+** Force your editor coding style conherent with the coding guide.
+** Don't use the only class constructor function systle
+   The name of topics and parameters is fixed, so it is not flexible.
+** Not global variables in the lib
+** How to get parameters better
+   #+BEGIN_SRC C++
+     // Not good
+     private_nh.getParam("param_launch_name", param_value);
+
+     // Good
+     value = private_nh.param("param_launch_name", DEFAULT_VALUE);
+   #+END_SRC
+
+** 
