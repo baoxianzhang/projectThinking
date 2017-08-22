@@ -1,0 +1,35 @@
+* Setting ROS consistent code style
+** Clion
+*** Open *settings*
+    "*File*"->"*Settings*"
+    [[img/Settings_Clion][Settings]]
+** 2 spaces indent
+   #+BEGIN_SRC example
+   Indent each block by 2 spaces. Never insert literal tab characters.
+
+   The contents of a namespace are not indented.
+   #+END_SRC
+
+   "Editor"->"Code Style"->"C/C++"->"Tabs and indents"
+   #+BEGIN_SRC example
+   - Tab size: 2
+   - Indent: 2
+   - Continuation indent: 2
+   - Indent in lambdas: 2
+   - Indent members of plain structures: 2
+   - Indent members of classes: 2
+   - Indent visibility keywords in class/structure: 2
+   - indent members of namespace: 0
+   - Preprocessor directive indent: 0
+   #+END_SRC
+
+** Braces
+   "Editor"->"Code Style"->"C/C++"->"Wrapping and Braces"
+   #+BEGIN_SRC example
+   Braces placement
+   - In classes and structures: Next line
+   - In namespaces: Next line
+   - In functions: Next line
+   - In lambdas: Next line
+   - Other: Next line
+   #+END_SRC

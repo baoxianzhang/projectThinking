@@ -6,14 +6,18 @@
    Use the suitable space to make the code more readable.
    Try to align the "=" when several assignments.
    #+BEGIN_SRC C++
-     // Good
-     for(int i = 0; i < 10; ++i)
-     {
-     }
-
      // Bad
      for(int i=0;i<10;i++)
      {
+       transform(0,0)=cosf(theta);
+       transform(0,1)=-sinf(theta);
+     }
+
+     // Good
+     for(int i = 0; i < 10; ++i)
+     {
+       transform(0,0) =  cosf(theta);
+       transform(0,1) = -sinf(theta);
      }
    #+END_SRC
 ** Pi
@@ -105,8 +109,9 @@
  */
    #+END_SRC
 
-** Comment
+** Comment and documentation
    Use doxygen style to comment your code in *English*.
+   All the documentation should be placed with the code repository.
 
    #+BEGIN_SRC C++
      /** @brief Fibonacci calculation
@@ -117,18 +122,22 @@
          unsigned int fib_value = fib.calulateFibonacci(100);
          ...
          @endcode
-      ,*/
+      */
      Class Fibonacci
      {
+     public:
        //! the default constructor
        Fibonacci();
        /** @brief Caculate the fibonacci value
            @param[in] n the nth elemnt
            @return the fibonacci of n
-       ,*/
+       */
        unsigned int calculateFibonacci(unsigned int n);
+       private:
+         int var; //!< Brief description after the member
      };
    #+END_SRC
+
 ** Coding
    All team memebers use the same version of gcc and g++, not to bore by the compiler.
 
@@ -197,23 +206,33 @@
    #+END_SRC
 
 ** Nameing
-   Take time to a good name for a variable and function, be self-description.
+   Take time to a good name for a variable and function, be self-description, self-explanatory.
    #+BEGIN_SRC C++
-     // Good
-     // float vel_mean;
      // Bad
-     // float mean_vel;
-
-     // Good
-     // std::string mappath_save;
-     // Bad
-     // std::string save_mapping_path;
-
+     // float val1;
+     // float val2;
    #+END_SRC
 
 ** Exception handling
    Try to consider some situations when the code fails to run.
    Try to output some useful message to remind the code status, don't message the core methods.
+
+   #+BEGIN_SRC C++
+     // Bad
+     if(pointcloud.empty())
+     {
+       return;
+     }
+
+     // Good
+     if(pointcloud.empty())
+     {
+       std::err << "The input cloud is empty ..." << std::endl;
+       return;
+     }
+
+   #+END_SRC
+
 ** Launch file
    Define custom variables in the launch files. Don't use the *absolute path* in the launch and the code.
 ** Rviz file
@@ -367,7 +386,7 @@
 ** Force your editor coding style conherent with the coding guide.
 ** Don't use the only class constructor function systle
    The name of topics and parameters is fixed, so it is not flexible.
-** Not global variables in the lib
+** No global variables in the lib
 ** How to get parameters better
    #+BEGIN_SRC C++
      // Not good
@@ -376,5 +395,21 @@
      // Good
      value = private_nh.param("param_launch_name", DEFAULT_VALUE);
    #+END_SRC
+   
+** for loop
 
-** 
+   #+BEGIN_SRC C++
+     // Bad C style
+     int count;
+     for(count=0; count <7; count++)
+     {
+     }
+
+     //Good C=++ style
+     for(int count = 0; count < 7; ++count)
+     {
+     }
+   #+END_SRC
+
+** Be care of abs which return an unsigned int, when need float use absf
+** publish using the pcl pointcloud type not sensor_msgs type

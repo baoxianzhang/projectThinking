@@ -6,17 +6,35 @@
 
 namespace demo_namespace
 {
-class DemoImpl;
+
+/** @brief Demo class
+
+    Here is the longer description.
+    @code
+    demo_namespace::Demo demo_obj;
+    int sum = demo_obj.addTwoInt(10, 10);
+    ...
+    @endcode
+*/
 class Demo
 {
 public:
   Demo();
   ~Demo();
+  /** @brief Do something
+  */
   void doSomething(void);
+  /** @brief plus two int number
+      @param[in] a int number for plus
+      @param[in] b another int number for plus
+      @return the sum of a and b
+  */
   int addTwoInt(const int a, const int b);
 
 private:
-  std::tr1::shared_ptr<demo_namespace::DemoImpl> demo_impl_;
+  class DemoImpl;
+  //! comment before the member
+  std::tr1::shared_ptr<demo_namespace::DemoImpl> demo_impl_; //!< comment in the right
 };
 
 }      // END NAMESPACE

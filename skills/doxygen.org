@@ -42,7 +42,7 @@ If you want to document the members of a file, struct, union, class, or enum, it
          unsigned int fib_value = fib.calulateFibonacci(100);
          ...
          @endcode
-      ,*/
+      */
      Class Fibonacci
      {
      public:
@@ -51,7 +51,7 @@ If you want to document the members of a file, struct, union, class, or enum, it
        /** @brief Caculate the fibonacci value
            @param[in] n the nth elemnt
            @return the fibonacci of n
-       ,*/
+       */
        unsigned int calculateFibonacci(unsigned int n);
        private:
          int var; //!< Brief description after the member
