@@ -2,14 +2,14 @@
 ** Clion
 *** Open *settings*
     "*File*"->"*Settings*"
-    [[img/Settings_Clion.png][Settings]]
+    [[file:img/Settings_Clion.png]]
 *** 2 spaces indent
     #+BEGIN_SRC example
     Indent each block by 2 spaces. Never insert literal tab characters.
 
     The contents of a namespace are not indented.
     #+END_SRC
-    [[img/Indent_Clion.png][Indent]]
+    [[file:img/Indent_Clion.png]]
 
     "Editor"->"Code Style"->"C/C++"->"Tabs and indents"
     #+BEGIN_SRC example
@@ -26,7 +26,7 @@
 
 *** Braces
     "Editor"->"Code Style"->"C/C++"->"Wrapping and Braces"
-   [[img/Braces_Clion.png][Braces]]
+   [[file:img/Braces_Clion.png]]
     #+BEGIN_SRC example
    Braces placement
    - In classes and structures: Next line
