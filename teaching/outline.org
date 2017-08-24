@@ -1,0 +1,38 @@
+* Outline
+** Lesson 1
+*** Library encapsulation
+*** Better software
+** Lesson 2
+*** Basic C++ style guide
+*** Coding notes
+** Lesson 3
+*** Tools
+**** Build tools
+**** Coding tools
+**** Document tools
+** Lesson 4
+*** Project structure
+*** Document
+**** Doxygen
+**** Markdown
+*** Test
+**** Google unit test
+** Lesson 5
+*** Team work
+**** Git
+**** Gitlab
+     Use the issue to report bugs.
+** Lesson 6
+*** Better ecosystem
+**** Stand on huge man shoudler
+     When not knowing something, first ask somebody may know it.
+     Search the solution on the internet, first.
+**** Accumulation
+     Don't repeate the old works.
+**** Share your knowledge
+     For example, build a code snapit repository.
+**** Listen and do right things
+**** No pundit, support your own opinion
+**** Write the doc often
+**** Ask often
+**** Do it

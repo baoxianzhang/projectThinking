@@ -1,0 +1,46 @@
+* Better software
+** What is the better software
+*** Simple
+*** Clean
+*** Consistency
+*** Efficient
+*** Portability
+*** Reusable
+*** Highly cohesive and low coupling
+*** Well design and constrution
+*** Well documentation
+*** Better than before
+** How to write better software
+*** Master coding language
+*** Coding style
+    Naming etc.
+*** Stand on huge men' shoulder
+*** Good team work
+*** The small the better
+*** The simple the better
+*** One funtion one thing
+*** Avoid dupilcate
+*** Review code frequently
+    Refine your code.
+*** Optimization
+    Make it run, then make it right,then make it fast.
+
+** Preparation
+*** Coding guide
+**** [[http://wiki.ros.org/CppStyleGuide][*ROS C++ Style Guide*]]
+**** ROS Developer's Guide
+**** Google C++ Style Guide
+*** Coding tools
+***** Clion
+***** Qt Creator
+***** Vim
+***** Emacs
+
+*** Build tools
+**** catkin build
+*** Git
+*** Doxygen
+
+*** Gtest
+** References
+   [[http://www.faqs.org/docs/artu/ch01s06.html][Basic of the Unix Philosophy]]
