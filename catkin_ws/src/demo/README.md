@@ -8,7 +8,7 @@ Demo project folder structure is designed for the ROS package, but also suited f
 ### Structure
 Project is organized in several folders, each for different usages.
 
-<blockquote>
+```
 demo
 ├── cfg
 │   └── cfg.yaml
@@ -38,8 +38,8 @@ demo
 ├── srv
 │   └── DemoSrv.srv
 └── utest
-└── demo_test.cpp
-</blockquote>
+    └── demo_test.cpp
+```
 
 + Add the folder according the project specific.
 + Put all the configuration files which may define the parameters in the code in the cfg foder.
