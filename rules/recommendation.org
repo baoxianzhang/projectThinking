@@ -1,25 +1,91 @@
 * Project construction
-** wstool and rosinstall file
+** [[http://wiki.ros.org/wstool][wstool]] and [[http://wiki.ros.org/wstool][rosinstall file]]
 *** Pro
     multi-repository enable
     separate the repository to separate the commit msg
 
+*** Install
+    #+BEGIN_SRC sh
+      # install rosws/rosinstall
+      sudo apt-get install python-wstool
+      sudo apt-get install python-rosinstall
+      # or
+      sudo pip install -U wstool
+      sudo pip install -U rosinstall
+    #+END_SRC
+
 ** Project structure
-   #+BEGIN_QUOTE
+   #+BEGIN_SRC example
    -- project repository
    -- src
-   -- .rosinstall
+   -- .rosinstall                          // option
    -- folder1 (1st package repository)
    -- folder2 (2nd package repository)
    -- ..
    -- folderN (n-th package repository)
-   #+END_QUOTE
-* Build tool
-  Use [[http://catkin-tools.readthedocs.io/en/latest/][*catkin build*]], not use catkin_make.
+   #+END_SRC
 
-  The current release of catkin_tools supports building two types of packages:
-  - Catkin – CMake packages that use the Catkin CMake macros
-  - CMake – “Plain” CMake packages
+   #+BEGIN_SRC example
+  demo
+  ├── cfg
+  │   └── cfg.yaml
+  ├── CMakeLists.txt
+  ├── data
+  ├── doc
+  │   └── theory.md
+  ├── include                         // exported header files
+  │   └── demo
+  │       └── demo.h
+  ├── launch
+  │   └── demo.launch
+  ├── model
+  ├── msg
+  │   └── DemoMsg.msg
+  ├── package.xml
+  ├── README.md
+  ├── rviz
+  │   └── demo.rviz
+  ├── script
+  │   └── dependence_install.sh
+  ├── src                            // source code(cpp and internal header files)
+  │   ├── demo.cpp
+  │   ├── demo_impl.cpp
+  │   ├── demo_impl.h
+  │   └── main.cpp
+  ├── srv
+  │   └── DemoSrv.srv
+  └── utest
+      └── demo_test.cpp
+   #+END_SRC
+
+
+
+* Build tool
+
+  Use [[http://catkin-tools.readthedocs.io/en/latest/][*catkin build*]], not use catkin_make.
+**  Parallel Isolated Catkin Workflow and catkin build
+
+   The limitations of catkin_make_isolated and the need for additional high-level build tools lead to the development of a parallel version of catkin make isolated, or pcmi, as part of Project Tango. pcmi later became the build verb of the catkin command included in this project.
+
+   As such, the principle behavior of the build verb is to build each package in isolation and in topological order while parallelizing the building of packages which do not depend on each other.
+
+   Other functional improvements over catkin_make and catkin_make_isolated include the following:
+
+   The use of sub-command “verbs” for better organization of build options and build-related functions
+   Robustly adapting a build when packages are added to or removed from the source space
+   Context-aware building of a given package based on the working directory
+   The ability to completely clean a single package’s products from a workspace
+   Utilization of persistent build metadata which catches common errors
+   Support for different build “profiles” in a single workspace
+   Explicit control of workspace chaining
+   Additional error-checking for common environment configuration errors
+   Numerous other command-line user-interface improvements
+   Next  Previous
+
+** Current support
+   The current release of catkin_tools supports building two types of packages:
+   - Catkin – CMake packages that use the Catkin CMake macros
+   - CMake – “Plain” CMake packages
 
 ** Installing catkin_tools
 *** Installing on Ubuntu with apt-get
@@ -108,4 +174,4 @@
 ** Some files should not be added in the VCS
    Try to write the .gitignore file. These files should not be added in the VCS, bin, obj, dll, ~xxx, ...
    Like g2o-master.zip g2o-tutorial-master.zip, just extract the zip and uploading the code, don't include the original zip.
-** 
+**

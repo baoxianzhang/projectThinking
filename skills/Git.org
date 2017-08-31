@@ -1,14 +1,15 @@
 * Git
   Git 是免费的开源的分布式版本控制系统，是目前世界上被最广泛使用的现代软件版本管理系统。
-  对 Git 的误解:
-  - 把它当做代码或者其他东西的存储的地方
-　- 会把以前的东西丢掉
-  - 
-  #+BEGIN_EXAMPLE
-  https://git-scm.com
-  https://git-scm.com/docs
-  https://github.com
-  #+END_EXAMPLE
+
+  - Git 的误解:
+    + 把它当做代码或者其他东西的存储的地方
+    + 会把以前的东西丢掉
+  - Git 的资源
+    #+BEGIN_EXAMPLE
+    https://git-scm.com
+    https://git-scm.com/docs
+    https://github.com
+    #+END_EXAMPLE
 ** Git 的由来
    Linus Torvalds->Linux kernal(1991)->BitKeeper(2002)->Git(2005)
 
@@ -89,7 +90,6 @@
    #+BEGIN_EXAMPLE
    git://
    http(s)://
-   user@server:/path.git 表示的 SSH 传输协议
    #+END_EXAMPLE
    .gitignore 对某些文件或者某些文件夹不进行版本控制
    [[https://github.com/github/gitignore][A collection of useful .gitignore templates]]
@@ -154,16 +154,20 @@
     [[img/gitcommit.png]]
 
     Git 最佳实践：commit msg
+
     http://blog.jobbole.com/109197/?utm_source=blog.jobbole.com&utm_medium=relatedPosts
+
     git commit 的信息需要简明的表示做的是啥，不要 update, fix 这些完全不知道什么用途的信息。
+
     Tips:
     1. One thing one commit
     在提交 commit 的时候尽量保持这个 commit 只做一件事情，比如实现摸个功能或者修改了配置文件。
     因为:
-    +如果每个 commit 都是一件事情，阅读整个项目代码就可以通过 commit 的信息比较容易理解当初的开发过程。
-    +cherry-pick，从一个分支的 commit"拷贝"到另外一个分支。如果 commit 非常清楚，cherry-pick 就比较轻松。
-    +code review 中，阅读代码就比较痛苦。
-    1. thoughtbot 规范
+    + 如果每个 commit 都是一件事情，阅读整个项目代码就可以通过 commit 的信息比较容易理解当初的开发过程。
+    + cherry-pick，从一个分支的 commit"拷贝"到另外一个分支。如果 commit 非常清楚，cherry-pick 就比较轻松。
+    + code review 中，阅读代码就比较痛苦。
+
+    - thoughtbot 规范
     #+BEGIN_EXAMPLE
     # 50-character subject line
 
@@ -325,11 +329,6 @@
     Rebase 的黄金法则
     绝不要在公共的分之上使用它
     #+END_EXAMPLE
-*** git fetch
-    #+BEGIN_SRC sh
-    git fetch <remote>拉取所有分支
-    git fetch <remote> <branch> 拉取特定分支
-    #+END_SRC sh
 *** git reset
     把当前分支指向另一个位置，并相应的变动工作目录和索引。
     #+BEGIN_SRC sh
@@ -532,17 +531,18 @@
      origin/develop: develop 最新代码，也成集成分支，其他分支合并到这个分支来。
 **** feature
      从 devevop 来往 develop 去
-     #+BEGIN_QUOTE
+     #+BEGIN_SRC sh
      git checkout -b myfeature develop
      // do some work
      git checkout develop
      git merge --no-ff myfeature
      git branch -d myfeature
      git push origin develop
-     #+END_QUOTE
+     #+END_SRC
+
 **** release
      从 develop 来往 develop,master 去
-     #+BEGIN_QUOTE
+     #+BEGIN_SRC sh
      git checkout -b release-1.2 develop
      // do some docs another relative to release
      git checkout master
@@ -553,11 +553,11 @@
      git merge --no-ff release-1.2
 
      git branch -d release-1.2
-     #+END_QUOTE
+     #+END_SRC
 
 **** hotfix
      从 master 来往 develop,master 去
-     #+BEGIN_QUOTE
+     #+BEGIN_SRC sh
      git checkout -b hotfix-1.2.1 master
      // do some hotfix
      git checkout master
@@ -566,7 +566,7 @@
      git checkout develop
      git merge --no-ff hotfix-1.2.1
      git branch -d hotfix-1.2.1
-     #+END_QUOTE
+     #+END_SRC
 *** Windows
     [[https://my.oschian.net/lunqi/blog/500881][使用 SourceTree]]
     [[file:img/sourcetree.png]]
@@ -585,7 +585,7 @@
     git push --tags
     git flow hotfix start hotfix-1.0.1
     git flow hotfix finish hotfix-1.0.1
-    #+END_SRC sh
+    #+END_SRC
 *** 开发示例
 **** 团队负责人
      创建项目：在 gitlab 服务器创建一个 testGitflow，添加 README.md 除了默认的 master 分支外，在创建一个 develop 分支。
