@@ -1,9 +1,6 @@
 * Git
   Git 是免费的开源的分布式版本控制系统，是目前世界上被最广泛使用的现代软件版本管理系统。
 
-  - Git 的误解:
-    + 把它当做代码或者其他东西的存储的地方
-    + 会把以前的东西丢掉
   - Git 的资源
     #+BEGIN_EXAMPLE
     https://git-scm.com
@@ -23,7 +20,7 @@
     - 去中心化
     SVN 必须从中心仓库获取与提交代码，这种也是 Git 的主要方式。但实际中每个机器上的仓库都是一个完整的库。你可以 pull 张三的库，然后 push 给李四。例如,github 还有一个 Fork 功能。
     - 本地提交
-    本地就是一个完整的开发仓库，可以实现本体提交，本地回滚。SVN 需要有中心服务器的参与。
+    本地就是一个完整的开发仓库，可以实现本地提交，本地回滚。SVN 需要有中心服务器的参与。
     - 分支策略
     SVN 是复制一份代码到分支目录，而 Git 是通过的分支点做一个标记。
     "Branch is cheap."
@@ -91,7 +88,7 @@
    git://
    http(s)://
    #+END_EXAMPLE
-   .gitignore 对某些文件或者某些文件夹不进行版本控制
+   .gitignore 配置那些不进行版本控制的文件或文件夹
    [[https://github.com/github/gitignore][A collection of useful .gitignore templates]]
 ** Git 安装
 *** Windows
@@ -161,7 +158,7 @@
 
     Tips:
     1. One thing one commit
-    在提交 commit 的时候尽量保持这个 commit 只做一件事情，比如实现摸个功能或者修改了配置文件。
+    在提交 commit 的时候尽量保持这个 commit 只做一件事情，比如实现某个功能或者修改了配置文件。
     因为:
     + 如果每个 commit 都是一件事情，阅读整个项目代码就可以通过 commit 的信息比较容易理解当初的开发过程。
     + cherry-pick，从一个分支的 commit"拷贝"到另外一个分支。如果 commit 非常清楚，cherry-pick 就比较轻松。
@@ -327,10 +324,10 @@
     把某一行中删除，git 会把这个提交从历史中移除。
 
     Rebase 的黄金法则
-    绝不要在公共的分之上使用它
+    绝不要在公共的分支上使用它
     #+END_EXAMPLE
 *** git reset
-    把当前分支指向另一个位置，并相应的变动工作目录和索引。
+    把当前分支指向另一个位置，并变动相应的工作目录和索引。
     #+BEGIN_SRC sh
     git reset HEAD~3
     #+END_SRC sh
@@ -359,7 +356,7 @@
     git checkout -- <file> :撤销在暂存区的文件修改作用
     #+END_SRC sh
 *** git revert
-    撤销一个提交的同事会创建一个新的提交。
+    撤销一个提交的同时会创建一个新的提交。
 
     [[file:img/gitrevertbefore.png]]
     [[file:img/gitrevertafter.png]]
@@ -477,7 +474,7 @@
     | revert   | 提交层面 | 在公共分支上回滚更改                                 |
     | revert   | 文件层面 | 没有                                                 |
 **** reset
-     提交层面:
+     - 提交层面:
      reset 将一个分支的末端指向另一个提交。这个可以用来移除当前分支的一些提交。
      比如下面两条命令让 hotfix 分支向后回退了两个提交。
      #+BEGIN_SRC sh
@@ -491,18 +488,26 @@
 
      当你传入 HEAD 以外的的其他提交的时候要格外小心，因为 reset 会重写当前分支的历史，因此，和 rebase 一样不要在公共分支上操作。
 
-     文件层面:
-     git reset HEAD~2 foo.py 将倒数第二个提交中的 foo.py 加入到暂存区，供下一个提交使用。
-     --soft、--mixed、--hard 对文件层面的 git reset 毫无作用，因为暂存区的文件一定会变化，而工作目录的文件一定不变。
+     - 文件层面:
+     #+BEGIN_SRC sh
+       git reset HEAD~2 foo.py
+     #+END_SRC
+     将倒数第二个提交中的 foo.py 加入到暂存区，供下一个提交使用。
+
+     --soft、--mixed、--hard
 
 **** checkout
-     提交层面:
+     - 提交层面:
      切换分支，转移 HEAD 的指向。并不会移动分支。
-     文件层面:
+     - 文件层面:
      更改的是工作目录的而不是暂存区的。
-     git checkout HEAD~2 foo.py 将工作目录中的 foo.py 同步到了倒数第二个提交的 foo.py
+     #+BEGIN_SRC sh
+     git checkout HEAD~2 foo.py 
+     #+END_SRC
+
+     将工作目录中的 foo.py 同步到了倒数第二个提交的 foo.py
 **** revert
-     revert 撤销一个提交的同事会创建一个新的提交。这是一个安全的方法，它不会重写提交历史。比如下面的命令会找出倒数第二个提交，然后创建一个新的提交来撤销这些更改，然后把这个提交加入项目中。
+     revert 撤销一个提交的同同时会创建一个新的提交。这是一个安全的方法，它不会重写提交历史。比如下面的命令会找出倒数第二个提交，然后创建一个新的提交来撤销这些更改，然后把这个提交加入项目中。
      #+BEGIN_SRC sh
      git checkout hotfix
      git revert HEAD~2
@@ -510,20 +515,19 @@
      [[file:img/gitrevertbefore.png]]
      [[file:img/gitrevertafter.png]]
 
-     #+BEGIN_SRC sh
+     #+BEGIN_SRC example
      git revert 可以用在公共分支上，git reset 应该用在私有分支上。
      git revert 撤销已经提交的更改，git reset HEAD 撤销没有提交的更改。
-     #+END_SRC sh
+     #+END_SRC
 
-*** rebase merge
-    rebase 变基，补丁重演
-    merge 三分合并
 ** Git 的工作流
 *** 中心化的工作流
 *** 基于功能分支的工作流
 *** Gitflow 工作流
 *** Fork 工作流
 ** Git FLow
+*** [[nvie.com/posts/a-successful-git-branching-model][A successful Git branching model]]
+
    [[file:img/git-flow-model.png]]
 **** master
      origin/master：master 产品级的代码
@@ -588,7 +592,7 @@
     #+END_SRC
 *** 开发示例
 **** 团队负责人
-     创建项目：在 gitlab 服务器创建一个 testGitflow，添加 README.md 除了默认的 master 分支外，在创建一个 develop 分支。
+     创建项目：在 gitlab 服务器创建一个 testGitflow，添加 README.md 除了默认的 master 分支外，再创建一个 develop 分支。
      通常 gitlab 中将 master 设置为保护分支，除了项目负责人之外，其他人无权向其推送代码。所以需要创建 develop。
 **** 其他成员
 ***** 准备
