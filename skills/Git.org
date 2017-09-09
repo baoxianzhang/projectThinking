@@ -532,9 +532,9 @@
 **** master
      origin/master：master 产品级的代码
 **** develop
-     origin/develop: develop 最新代码，也成集成分支，其他分支合并到这个分支来。
+     origin/develop: develop 最新代码，集成分支，其他分支合并到这个分支来。
 **** feature
-     从 devevop 来往 develop 去
+     从 devevop 来, 往 develop 去
      #+BEGIN_SRC sh
      git checkout -b myfeature develop
      // do some work
@@ -545,7 +545,7 @@
      #+END_SRC
 
 **** release
-     从 develop 来往 develop,master 去
+     从 develop 来, 往 develop,master 去
      #+BEGIN_SRC sh
      git checkout -b release-1.2 develop
      // do some docs another relative to release
@@ -560,7 +560,7 @@
      #+END_SRC
 
 **** hotfix
-     从 master 来往 develop,master 去
+     从 master 来, 往 develop,master 去
      #+BEGIN_SRC sh
      git checkout -b hotfix-1.2.1 master
      // do some hotfix

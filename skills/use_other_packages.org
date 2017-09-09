@@ -1,0 +1,80 @@
+* Use other packages in your own package
+
+  Every package should only implement just one funtion, add the exported interfaces to libraries for exported usages.
+
+  It is worth doing so, it can make software flexiable, maintainable.
+
+** How to use the packages with exported libraries
+
+   Here is an example.
+
+   - [[https://github.com/ethz-asl/ethzasl_icp_mapping/tree/reintegrate/master_into_indigo_devel/libpointmatcher_ros][libpointmatch_ros]] is the package to be called.
+
+   - lidar_location is the package to implement the localization using the pointmatch-ros pacakge.
+
+*** Add exported libraries and other information(like include_dirs) in catkin_package
+    According to the [[http://wiki.ros.org/catkin/CMakeLists.txt][catkin/CMakeLists.txt]] 6. catkin_pacakge():
+    - INCLUDE_DIRS - The exported include paths (i.e. cflags) for the package
+    - *LIBRARIES* - The *exported libraries* from the project
+    - CATKIN_DEPENDS - Other catkin projects that this project depends on
+    - DEPENDS - Non-catkin CMake projects that this project depends on. For a better understanding, see this explanation.
+    - CFG_EXTRAS - Additional configuration options
+
+ 
+    Add the exported libraries and other information to the catkin_package like this (here the exported libraries is pointmatcher_ros):
+    #+BEGIN_SRC cmake
+    catkin_package(
+    INCLUDE_DIRS include
+    LIBRARIES pointmatcher_ros
+    CATKIN_DEPENDS
+    roscpp
+    sensor_msgs
+    nav_msgs
+    tf
+    tf_conversions
+    eigen_conversions
+    libpointmatcher
+    )
+    #+END_SRC
+    *catkin_package is added for what you want to exported for other packages, like the exported libraries and exported header files.*
+
+*** Add libpointmatch_ros package to the depend of lidar_location in the package.xml
+    #+BEGIN_SRC xml
+    <buildtool_depend>catkin</buildtool_depend>
+    <build_depend>roscpp</build_depend>
+    <build_depend>rospy</build_depend>
+    <build_depend>std_msgs</build_depend>
+    <build_depend>sensor_msgs</build_depend>
+    <build_depend>geometry_msgs</build_depend>
+    <build_depend>message_filters</build_depend>
+    <build_depend>tf</build_depend>
+    <build_depend>tf_conversions</build_depend>
+    <build_depend>libpointmatcher_ros</build_depend>
+    <build_depend>message_generation</build_depend>
+
+    <run_depend>roscpp</run_depend>
+    <run_depend>rospy</run_depend>
+    <run_depend>std_msgs</run_depend>
+    <run_depend>sensor_msgs</run_depend>
+    <run_depend>geometry_msgs</run_depend>
+    <run_depend>message_filters</run_depend>
+    <run_depend>tf</run_depend>
+    <run_depend>tf_conversions</run_depend>
+    <run_depend>libpointmatcher_ros</run_depend>
+    <run_depend>message_runtime</run_depend>
+    <run_depend>message_generation</run_depend>
+    #+END_SRC
+
+*** Add libpointmatcher_ros package to find_package() in CMakeLists.txt
+    #+BEGIN_SRC cmake
+find_package(catkin REQUIRED COMPONENTS 
+             roscpp std_msgs sensor_msgs geometry_msgs 
+             message_filters tf tf_conversions 
+             libpointmatcher_ros message_generation)
+    #+END_SRC
+
+
+
+
+  Now the pointmatcher_ros library is now in the ${catkin_LIBRARIES}.
+  Use the library by target_link_libraries.

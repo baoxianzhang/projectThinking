@@ -395,7 +395,7 @@
      // Good
      value = private_nh.param("param_launch_name", DEFAULT_VALUE);
    #+END_SRC
-   
+
 ** for loop
 
    #+BEGIN_SRC C++
@@ -413,3 +413,104 @@
 
 ** Be care of abs which return an unsigned int, when need float use absf
 ** publish using the pcl pointcloud type not sensor_msgs type
+** Use dynamic parameters (dynamic_reconfigure) for parameter which are likely to change during run time.
+** Node Handles
+   Default (public) node handle: nh_ = ros::NodeHandle();
+   Private node handle: nh_private_ = ros::NodeHandle(“~”);
+   Namespaced node handle: nh_aslam_ = ros::NodeHandle(“aslam”);
+   Global node handle: nh_global_ = ros::NodeHandle(“/“); (You probably shouldn’t use this ever.)
+
+   Generally you will only use the first 2 -- you could also use the namespaced node handle for separating out publishers for nodes that have many.
+
+   To explain what these do and how they should be used, let’s assume your ROS node is named ros_node, in namespace blah, and you are trying to look up the name topic. Here is what they will resolve to using all 4 node handles:
+
+   /blah/topic
+   /blah/ros_node/topic
+   /blah/aslam/topic
+   /topic
+   If, instead, your try to resolve /topic, this will skip the namespace of the node and resolve to /topic.
+
+*** When to Use Which Node Handle
+
+    These are just general guidelines, but when possible, prefer to use the following in each case:
+
+    Subscribers - usually public node handles.
+    Publishers - usually private node handles for most output/visualization, occasionally necessary to use public for globally-used data (i.e., /odom topic).
+    Parameters - almost always private node handle.
+    Never use global names. This is because they do not resolve properly when you push nodes into namespaces, and does not allow you to run more than one of your node at a time properly. Or use multiple robots on the same master. Define published topics and parameters relative to the nodes namespace:
+
+    Good: odometry, grid_map, cam0/camera_info
+    Bad: /odometry, /grid_map, /helicopter/cam0/camera_info
+** Parameter Organisation
+   If your node has only one or two parameters, you can set them in a launch file with the <param> tag:
+
+   #+BEGIN_SRC xml
+   <launch>
+   <node pkg="my_package" type="my_node" name="my_name" output="screen">
+   <param name="my_parameter" value="10" />
+   </node>
+   </launch>
+   #+END_SRC
+
+   In general (preferred), organize the parameters in YAML-files and load them via the rosparam-tag:
+
+   #+BEGIN_SRC xml
+   <launch>
+   <node pkg="my_package" type="my_node" name="my_name" output="screen">
+   <rosparam command="load" file="$(find my_package)/config/robots/starleth.yaml" />
+   <rosparam command="load" file="$(find my_package)/config/sensors/default.yaml" />
+   </node>
+   </launch>
+   #+END_SRC
+   Do not use command line parameters but the ROS parameter server. For parameters that are likely to change at runtime, use dynamic_reconfigure.
+** Using Third-Party Libraries
+   Encourages standalone libraries with no ROS dependencies. Don’t put ROS dependencies in the core of your algorithm!
+** Dependencies
+   Keep your dependencies clean:
+
+   Only depend on what you need,
+   Specify all dependencies,
+   Do not use implicit dependencies.
+** ROS Bag Files
+   Play a bag using recorded time (important when stamped data and TF was recorded):
+
+   #+BEGIN_SRC sh
+   rosbag play --clock foo.bag
+   #+END_SRC
+
+   Note: The /use_sim_time parameter must be set to true before the node is initialized.
+   #+BEGIN_SRC sh
+   rosparam set use_sim_time true
+   #+END_SRC
+
+** Time
+   Use ros::Time, ros::Duration, and ros::Rate instead of  system time.
+
+** Split packages
+   https://answers.ros.org/question/11835/when-should-i-split-my-code-into-multiple-packages-and-whats-a-good-way-to-split-it/
+   Your ROS packages should belong to one or more repositories. Each repository contains one or more packages, the build dependency units.
+
+   When creating a new package, choose the name carefully:
+
+   Package names are global to the entire ROS ecosystem.
+   They are messy to change later.
+   Try to pick names that will make sense to others who may wish to use your code.
+   Package names should start with a letter, and contain only letters, numbers and '_' characters. Lower case is preferred. Feel free to browse the current list for inspiriation.
+   Each package can be built separately, so pay attention to dependencies. The package dependency graph must be acyclic, i.e. no package may depend on another that directly or indirectly depends on it.
+
+   The overhead of a ROS package is not large. Define separate packages wherever they make sense.
+   Avoid combining nodes that pull in mutually unneeded dependencies.
+   To eliminate unnecessary build overhead, avoid combining nodes that are often used separately.
+   If programs with similar dependencies are generally used together, consider combining them into a single package.
+   If some nodes have common dependencies on shared code that you do not wish to export publicly, they can be combined internally within a single package.
+   If the shared code should be exported, consider making it a separate package that the others depend on. (This is reasonable, but not required. A single package can export libraries and headers as well as nodes.)
+   Consider combining message definitions in one or more separate packages. That usually simplifies the dependencies among packages, with nodes depending on the messages, and not so much on each other.
+** When Topics Should be Remapped
+Topic remapping is not just good for avoiding topic name collisions, but also for giving a node a "ROS API". This means a set of topics which are named in the context of the node.
+
+For example, if you must connect the topic "out" of node A (the publisher) to the topic "in" of node B (the subscriber). The communication model requires that both A and B communicates via a single topic. A topic is fully defined by its name, so as long as the resolved topic name is the same and they are connected to the same ROS Master, the nodes will be able to communicate with each other.
+
+Another point of view is the component writer point of view: one should not try to build complex topic names inside a node so that it matches the topic names of some other nodes. Very simple names (which are likely to create a name collision) are better as they will be renamed anyway! This is something many understand only long after using ROS. This pattern makes the whole "ROS API" of a node much easier to understand.
+* Reference
+** https://github.com/ethz-asl/ros_best_practices/wiki
+** http://wiki.ros.org/BestPractices
