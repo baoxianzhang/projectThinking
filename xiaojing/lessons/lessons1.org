@@ -1,0 +1,26 @@
+* Lesson One 
+Learn coding from examples 
+
+** Example One
+[[file:../img/q1.jpg]]
+
+** Example Two
+[[file:../img/q25.jpg]]
+
+** Example Three
+
+[[file:../img/q3.jpg]]
+
+
+** Example Four
+[[file:../img/q4.jpg]]
+
+** Example Five
+
+[[file:../img/q55.jpg]]
+
+** Example Six
+
+[[file:../img/q6.jpg]]
+** Example Seven
+[[file:../img/q75.png]]
